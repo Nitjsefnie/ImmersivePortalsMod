@@ -42,7 +42,6 @@ import qouteall.imm_ptl.core.CHelper;
 import qouteall.imm_ptl.core.ClientWorldLoader;
 import qouteall.imm_ptl.core.IPCGlobal;
 import qouteall.imm_ptl.core.IPGlobal;
-import qouteall.imm_ptl.core.compat.iris_compatibility.IrisInterface;
 import qouteall.imm_ptl.core.compat.sodium_compatibility.SodiumInterface;
 import qouteall.imm_ptl.core.ducks.IEWorldRenderer;
 import qouteall.imm_ptl.core.render.CrossPortalEntityRenderer;
@@ -296,8 +295,7 @@ public abstract class MixinLevelRenderer implements IEWorldRenderer {
     }
     
     private boolean ip_allowOverrideTerrainSetup() {
-        return !SodiumInterface.invoker.isSodiumPresent()
-            && !IrisInterface.invoker.isRenderingShadowMap();
+        return !SodiumInterface.invoker.isSodiumPresent();
     }
     
     @Inject(
@@ -500,14 +498,6 @@ public abstract class MixinLevelRenderer implements IEWorldRenderer {
         at = @At("HEAD"), cancellable = true
     )
     private void onRenderSkyBegin(PoseStack poseStack, Matrix4f matrix4f, float f, Camera camera, boolean bl, Runnable runnable, CallbackInfo ci) {
-        if (PortalRendering.isRendering()) {
-            if (PortalRendering.getRenderingPortal().isFuseView()) {
-                if (!IrisInterface.invoker.isShaders()) {
-                    ci.cancel();
-                }
-            }
-        }
-        
         if (PortalRendering.isRenderingOddNumberOfMirrors()) {
             MyRenderHelper.applyMirrorFaceCulling();
         }

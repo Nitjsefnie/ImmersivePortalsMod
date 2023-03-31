@@ -1,14 +1,11 @@
 package qouteall.imm_ptl.core.platform_specific;
 
-import com.fusionflux.gravity_api.util.GravityChannel;
-import com.fusionflux.gravity_api.util.packet.DefaultGravityPacket;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import qouteall.imm_ptl.core.IPModMain;
-import qouteall.imm_ptl.core.compat.GravityChangerInterface;
 import qouteall.q_misc_util.Helper;
 
 public class IPModEntry implements ModInitializer {
@@ -43,7 +40,6 @@ public class IPModEntry implements ModInitializer {
         }
         
         if (FabricLoader.getInstance().isModLoaded("gravity_api")) {
-            GravityChangerInterface.invoker = new GravityChangerInterface.OnGravityChangerPresent();
             Helper.log("Gravity API is present");
         }
         else {

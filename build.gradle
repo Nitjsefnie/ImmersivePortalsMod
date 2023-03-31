@@ -144,18 +144,6 @@ allprojects {
 
         modImplementation "maven.modrinth:sodium:${sodium_version}"
 
-        modCompileOnly "maven.modrinth:iris:${iris_version}"
-        implementation "org.anarres:jcpp:1.4.14" // for iris
-        implementation 'io.github.douira:glsl-transformer:2.0.0-pre8' // for iris
-        implementation 'org.antlr:antlr4-runtime:4.11.1' // for iris
-
-        modImplementation("com.github.qouteall:Gravity-Api:0.8.0-mc1.19.3") {
-            transitive = false
-            exclude(group: "net.fabricmc.fabric-api")
-        }
-        modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.1.0"
-        modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.1.0"
-
 //        api("com.github.LlamaLad7:MixinExtras:${mixin_extra_version}")
 //        annotationProcessor("com.github.LlamaLad7:MixinExtras:${mixin_extra_version}")
     }

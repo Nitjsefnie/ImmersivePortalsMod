@@ -31,7 +31,6 @@ import qouteall.imm_ptl.core.ClientWorldLoader;
 import qouteall.imm_ptl.core.IPGlobal;
 import qouteall.imm_ptl.core.McHelper;
 import qouteall.imm_ptl.core.block_manipulation.BlockManipulationClient;
-import qouteall.imm_ptl.core.compat.iris_compatibility.IrisInterface;
 import qouteall.imm_ptl.core.compat.sodium_compatibility.SodiumInterface;
 import qouteall.imm_ptl.core.ducks.IEGameRenderer;
 import qouteall.imm_ptl.core.ducks.IEMinecraftClient;
@@ -157,8 +156,6 @@ public class MyGameRenderer {
         ObjectArrayList<LevelRenderer.RenderChunkInfo> newChunkInfoList = VisibleSectionDiscovery.takeList();
         ((IEWorldRenderer) oldWorldRenderer).portal_setChunkInfoList(newChunkInfoList);
         
-        Object irisPipeline = IrisInterface.invoker.getPipeline(worldRenderer);
-        
         //switch
         ((IEMinecraftClient) client).setWorldRenderer(worldRenderer);
         client.level = newWorld;
@@ -189,9 +186,7 @@ public class MyGameRenderer {
         SodiumInterface.invoker.switchContextWithCurrentWorldRenderer(newSodiumContext);
         
         ((IEWorldRenderer) worldRenderer).portal_setTransparencyShader(null);
-        
-        IrisInterface.invoker.setPipeline(worldRenderer, null);
-        
+
         //update lightmap
         if (!RenderStates.isDimensionRendered(newDimension)) {
             helper.lightmapTexture.updateLightTexture(0);
@@ -239,8 +234,6 @@ public class MyGameRenderer {
         ((IEWorldRenderer) worldRenderer).portal_setFrustum(oldFrustum);
         
         RenderSystem.setProjectionMatrix(oldProjectionMatrix);
-        
-        IrisInterface.invoker.setPipeline(worldRenderer, irisPipeline);
         
         client.getEntityRenderDispatcher()
             .prepare(

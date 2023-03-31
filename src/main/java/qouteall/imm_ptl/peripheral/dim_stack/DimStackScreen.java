@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import qouteall.imm_ptl.core.CHelper;
 import qouteall.imm_ptl.core.IPGlobal;
-import qouteall.imm_ptl.peripheral.alternate_dimension.AlternateDimensions;
 import qouteall.imm_ptl.peripheral.guide.IPOuterClientMisc;
 import qouteall.q_misc_util.my_util.GuiHelper;
 import qouteall.q_misc_util.my_util.MyTaskList;
@@ -150,15 +149,6 @@ public class DimStackScreen extends Screen {
         }
         else {
             setEnabled(false);
-            
-            if (IPGlobal.enableAlternateDimensions) {
-                dimListWidget.entryWidgets.add(createDimEntryWidget(
-                    new DimStackEntry(AlternateDimensions.alternate5)
-                ));
-                dimListWidget.entryWidgets.add(createDimEntryWidget(
-                    new DimStackEntry(AlternateDimensions.alternate1)
-                ));
-            }
             dimListWidget.entryWidgets.add(createDimEntryWidget(new DimStackEntry(Level.OVERWORLD)));
             dimListWidget.entryWidgets.add(createDimEntryWidget(new DimStackEntry(Level.NETHER)));
         }

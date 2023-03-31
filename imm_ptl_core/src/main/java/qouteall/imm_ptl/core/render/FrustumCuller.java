@@ -7,7 +7,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import qouteall.imm_ptl.core.CHelper;
 import qouteall.imm_ptl.core.IPCGlobal;
-import qouteall.imm_ptl.core.compat.iris_compatibility.IrisInterface;
 import qouteall.imm_ptl.core.portal.Portal;
 import qouteall.imm_ptl.core.render.context_management.PortalRendering;
 import qouteall.q_misc_util.my_util.BoxPredicate;
@@ -59,10 +58,6 @@ public class FrustumCuller {
         if (!IPCGlobal.doUseAdvancedFrustumCulling) {
             return BoxPredicate.nonePredicate;
         }
-        if (IrisInterface.invoker.isRenderingShadowMap()) {
-            return BoxPredicate.nonePredicate;
-        }
-        
         if (PortalRendering.isRendering()) {
             return PortalRendering.getRenderingPortal().getInnerFrustumCullingFunc(cameraX, cameraY, cameraZ);
         }

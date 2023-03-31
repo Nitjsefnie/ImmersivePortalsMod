@@ -1,6 +1,5 @@
 package qouteall.imm_ptl.peripheral.dim_stack;
 
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;

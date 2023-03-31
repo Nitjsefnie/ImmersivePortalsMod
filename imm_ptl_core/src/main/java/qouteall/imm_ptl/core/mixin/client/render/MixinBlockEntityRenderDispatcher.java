@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import qouteall.imm_ptl.core.compat.iris_compatibility.IrisInterface;
 import qouteall.imm_ptl.core.portal.PortalLike;
 import qouteall.imm_ptl.core.render.context_management.PortalRendering;
 
@@ -27,9 +26,6 @@ public class MixinBlockEntityRenderDispatcher {
         MultiBufferSource vertexConsumerProvider,
         CallbackInfo ci
     ) {
-        if (IrisInterface.invoker.isRenderingShadowMap()) {
-            return;
-        }
         if (PortalRendering.isRendering()) {
             PortalLike renderingPortal = PortalRendering.getRenderingPortal();
             boolean canRender = renderingPortal.isInside(

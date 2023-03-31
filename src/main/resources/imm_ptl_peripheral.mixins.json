@@ -3,11 +3,6 @@
   "package": "qouteall.imm_ptl.peripheral.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "common.alternate_dimension.IEChunk1",
-    "common.alternate_dimension.IEChunkAccess_AlternateDim",
-    "common.alternate_dimension.IENoiseGeneratorSettings",
-    "common.alternate_dimension.IENoiseRouterData",
-    "common.alternate_dimension.MixinServerLevel_ModifySeed",
     "common.dim_stack.MixinChunkStatus",
     "common.dim_stack.MixinLevelInfo",
     "common.dim_stack.MixinLevelProperties",
@@ -20,11 +15,7 @@
   ],
   "client": [
     "client.MixinBossHealthOverlay",
-    "client.MixinSplashManager",
-    "client.alternate_dimension.MixinClientLevelData",
-    "client.alternate_dimension.MixinFogRenderer_A",
-    "client.alternate_dimension.MixinWorldRenderer_A",
-    "client.dim_stack.MixinCreateWorldScreen"
+    "client.MixinSplashManager"
   ],
   "injectors": {
     "defaultRequire": 1
