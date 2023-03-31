@@ -12,7 +12,6 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import qouteall.imm_ptl.core.compat.GravityChangerInterface;
 import qouteall.imm_ptl.core.portal.Portal;
 import qouteall.imm_ptl.core.render.context_management.RenderStates;
 import qouteall.imm_ptl.core.render.context_management.WorldRenderInfo;
@@ -49,14 +48,7 @@ public class TransformationManager {
         Direction gravityDirection,
         float pitch, float yaw
     ) {
-        DQuaternion gravity = GravityChangerInterface.invoker.getExtraCameraRotation(gravityDirection);
-        DQuaternion rawCameraRotation = DQuaternion.getCameraRotation(pitch, yaw);
-        if (gravity == null) {
-            return rawCameraRotation;
-        }
-        else {
-            return rawCameraRotation.hamiltonProduct(gravity);
-        }
+        return DQuaternion.getCameraRotation(pitch, yaw);
     }
     
     @Nullable
@@ -122,7 +114,7 @@ public class TransformationManager {
             
             // finalRot = rawCameraRotation * gravity * animationDelta * portalRot
             
-            Direction oldGravityDir = GravityChangerInterface.invoker.getGravityDirection(player);
+            Direction oldGravityDir = Direction.DOWN;
             
             DQuaternion oldCameraRotation = getCameraRotationWithGravity(
                 oldGravityDir,
@@ -140,20 +132,14 @@ public class TransformationManager {
             
             Direction newGravityDir = portal.getTeleportedGravityDirection(oldGravityDir);
             
-            if (newGravityDir != oldGravityDir) {
-                GravityChangerInterface.invoker.setClientPlayerGravityDirection(
-                    player, newGravityDir
-                );
-            }
-            
             // rawCameraRotation = finalRot * portalRot^-1 * animationDelta^-1 * gravity^-1
             // when getting the new pitch yaw, no need to consider portalRot and animation
             // rawCameraRotation = finalRot * gravity^-1
-            
+
             DQuaternion newGravityRot = DQuaternion.fromNullable(
-                GravityChangerInterface.invoker.getExtraCameraRotation(newGravityDir)
+                null
             );
-            
+
             DQuaternion newRawCameraRotation = immediateFinalRot.hamiltonProduct(newGravityRot.getConjugated());
             
             Tuple<Double, Double> pitchYaw =

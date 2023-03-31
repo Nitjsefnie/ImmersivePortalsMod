@@ -9,7 +9,6 @@ import qouteall.imm_ptl.core.IPMcHelper;
 import qouteall.imm_ptl.core.McHelper;
 import qouteall.imm_ptl.core.compat.PehkuiInterface;
 import qouteall.imm_ptl.core.chunk_loading.NewChunkTrackingGraph;
-import qouteall.imm_ptl.core.compat.GravityChangerInterface;
 import qouteall.imm_ptl.core.ducks.IEEntity;
 import qouteall.imm_ptl.core.ducks.IEServerPlayNetworkHandler;
 import qouteall.imm_ptl.core.ducks.IEServerPlayerEntity;
@@ -171,14 +170,6 @@ public class ServerTeleportationManager {
             portal.onEntityTeleportedOnServer(player);
             
             PehkuiInterface.invoker.onServerEntityTeleported(player, portal);
-            
-            if (portal.getTeleportChangesGravity()) {
-                Direction oldGravityDir = GravityChangerInterface.invoker.getGravityDirection(player);
-                GravityChangerInterface.invoker.setGravityDirectionServer(
-                    player, portal.getTransformedGravityDirection(oldGravityDir)
-                );
-            }
-            
         }
         else {
             Helper.err(String.format(
@@ -190,9 +181,6 @@ public class ServerTeleportationManager {
             ));
             teleportEntityGeneral(player, player.position(), ((ServerLevel) player.level));
             PehkuiInterface.invoker.setBaseScale(player, PehkuiInterface.invoker.getBaseScale(player));
-            GravityChangerInterface.invoker.setGravityDirectionServer(
-                player, GravityChangerInterface.invoker.getGravityDirection(player)
-            );
         }
     }
     

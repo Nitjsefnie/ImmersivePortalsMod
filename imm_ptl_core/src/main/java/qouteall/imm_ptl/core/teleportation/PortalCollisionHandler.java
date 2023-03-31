@@ -12,7 +12,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import qouteall.imm_ptl.core.IPGlobal;
 import qouteall.imm_ptl.core.McHelper;
-import qouteall.imm_ptl.core.compat.GravityChangerInterface;
 import qouteall.imm_ptl.core.ducks.IEEntity;
 import qouteall.imm_ptl.core.portal.Portal;
 import qouteall.imm_ptl.core.portal.PortalLike;
@@ -171,7 +170,7 @@ public class PortalCollisionHandler {
             );
             
             PortalLike collisionHandlingUnit = CollisionHelper.getCollisionHandlingUnit(collidingPortal);
-            Direction transformedGravityDirection = collidingPortal.getTransformedGravityDirection(GravityChangerInterface.invoker.getGravityDirection(entity));
+            Direction transformedGravityDirection = collidingPortal.getTransformedGravityDirection(Direction.DOWN);
             
             Vec3 collided = transformedAttemptedMove;
             collided = CollisionHelper.handleCollisionWithShapeProcessor(
@@ -264,7 +263,7 @@ public class PortalCollisionHandler {
         AABB originalBoundingBox,
         List<PortalCollisionEntry> portalCollisions
     ) {
-        Direction gravity = GravityChangerInterface.invoker.getGravityDirection(entity);
+        Direction gravity = Direction.DOWN;
         
         return CollisionHelper.handleCollisionWithShapeProcessor(
             entity, attemptedMove,

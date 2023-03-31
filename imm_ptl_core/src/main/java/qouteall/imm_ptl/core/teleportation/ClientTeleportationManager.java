@@ -16,7 +16,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.commons.lang3.Validate;
 import qouteall.imm_ptl.core.*;
 import qouteall.imm_ptl.core.compat.PehkuiInterface;
-import qouteall.imm_ptl.core.compat.GravityChangerInterface;
 import qouteall.imm_ptl.core.ducks.IEClientPlayNetworkHandler;
 import qouteall.imm_ptl.core.ducks.IEEntity;
 import qouteall.imm_ptl.core.ducks.IEGameRenderer;
@@ -517,11 +516,11 @@ public class ClientTeleportationManager {
         
         AABB playerBoundingBox = player.getBoundingBox();
         Portal collidingPortal = ((IEEntity) player).getCollidingPortal();
-        
-        Direction gravityDir = GravityChangerInterface.invoker.getGravityDirection(player);
+
+        Direction gravityDir = Direction.DOWN;
         Direction levitationDir = gravityDir.getOpposite();
-        Vec3 eyeOffset = GravityChangerInterface.invoker.getEyeOffset(player);
-        
+        Vec3 eyeOffset = new Vec3(0, player.getEyeHeight(), 0);
+
         AABB bottomHalfBox = playerBoundingBox.contract(eyeOffset.x / 2, eyeOffset.y / 2, eyeOffset.z / 2);
         Function<VoxelShape, VoxelShape> shapeFilter = c -> {
             if (collidingPortal != null) {
@@ -544,15 +543,11 @@ public class ClientTeleportationManager {
         
         Vec3 anchor = player.position();
         AABB collisionUnionLocal = Helper.transformBox(
-            collisionUnion, v -> GravityChangerInterface.invoker.transformWorldToPlayer(
-                gravityDir, v.subtract(anchor)
-            )
+            collisionUnion, v -> v.subtract(anchor)
         );
         
         AABB playerBoxLocal = Helper.transformBox(
-            playerBoundingBox, v -> GravityChangerInterface.invoker.transformWorldToPlayer(
-                gravityDir, v.subtract(anchor)
-            )
+            playerBoundingBox, v -> v.subtract(anchor)
         );
         
         double targetLocalY = collisionUnionLocal.maxY + 0.01;
@@ -577,7 +572,7 @@ public class ClientTeleportationManager {
                 return true;
             }
             
-            if (GravityChangerInterface.invoker.getGravityDirection(player) != gravityDir) {
+            if (Direction.DOWN != gravityDir) {
                 return true;
             }
             

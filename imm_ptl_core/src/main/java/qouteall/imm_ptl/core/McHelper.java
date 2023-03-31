@@ -45,7 +45,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.core.tools.picocli.CommandLine;
-import qouteall.imm_ptl.core.compat.GravityChangerInterface;
 import qouteall.imm_ptl.core.ducks.IEEntity;
 import qouteall.imm_ptl.core.ducks.IEEntityTrackingSection;
 import qouteall.imm_ptl.core.ducks.IESectionedEntityCache;
@@ -249,17 +248,17 @@ public class McHelper {
     }
     
     public static Vec3 getEyePos(Entity entity) {
-        Vec3 eyeOffset = GravityChangerInterface.invoker.getEyeOffset(entity);
+        Vec3 eyeOffset = new Vec3(0, entity.getEyeHeight(), 0);
         return entity.position().add(eyeOffset);
     }
     
     public static Vec3 getLastTickEyePos(Entity entity) {
-        Vec3 eyeOffset = GravityChangerInterface.invoker.getEyeOffset(entity);
+        Vec3 eyeOffset = new Vec3(0, entity.getEyeHeight(), 0);
         return lastTickPosOf(entity).add(eyeOffset);
     }
     
     public static void setEyePos(Entity entity, Vec3 eyePos, Vec3 lastTickEyePos) {
-        Vec3 eyeOffset = GravityChangerInterface.invoker.getEyeOffset(entity);
+        Vec3 eyeOffset = new Vec3(0, entity.getEyeHeight(), 0);
         
         setPosAndLastTickPos(
             entity,
@@ -892,15 +891,15 @@ public class McHelper {
     }
     
     public static Vec3 getWorldVelocity(Entity entity) {
-        return GravityChangerInterface.invoker.getWorldVelocity(entity);
+        return entity.getDeltaMovement();
     }
     
     public static void setWorldVelocity(Entity entity, Vec3 newVelocity) {
-        GravityChangerInterface.invoker.setWorldVelocity(entity, newVelocity);
+        entity.setDeltaMovement(newVelocity);
     }
     
     public static Vec3 getEyeOffset(Entity entity) {
-        return GravityChangerInterface.invoker.getEyeOffset(entity);
+        return new Vec3(0, entity.getEyeHeight(), 0);
     }
     
     public static Vec3 getAxisWFromOrientation(DQuaternion quaternion) {
