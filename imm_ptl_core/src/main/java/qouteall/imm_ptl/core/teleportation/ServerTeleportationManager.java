@@ -765,7 +765,7 @@ public class ServerTeleportationManager {
                 else {
                     @Nullable
                     Path path = chaser.getNavigation().createPath(
-                        new BlockPos(targetPos), 0
+                        Helper.toBlockPos(targetPos), 0
                     );
                     chaser.getNavigation().moveTo(path, 1);
                 }

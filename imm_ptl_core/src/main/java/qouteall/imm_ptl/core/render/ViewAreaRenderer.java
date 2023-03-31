@@ -70,7 +70,6 @@ public class ViewAreaRenderer {
         }
         
         GlStateManager._enableDepthTest();
-        GlStateManager._disableTexture();
         
         CHelper.enableDepthClamp();
         
@@ -92,8 +91,7 @@ public class ViewAreaRenderer {
         );
         
         shader.clear();
-        
-        GlStateManager._enableTexture();
+
         GlStateManager._enableCull();
         CHelper.disableDepthClamp();
         

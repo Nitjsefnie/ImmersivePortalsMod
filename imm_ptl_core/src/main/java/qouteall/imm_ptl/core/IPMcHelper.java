@@ -19,6 +19,7 @@ import qouteall.imm_ptl.core.ducks.IERayTraceContext;
 import qouteall.imm_ptl.core.portal.Portal;
 import qouteall.imm_ptl.core.portal.global_portals.GlobalPortalStorage;
 import qouteall.imm_ptl.core.render.CrossPortalEntityRenderer;
+import qouteall.q_misc_util.Helper;
 import qouteall.q_misc_util.my_util.LimitedLogger;
 
 import java.util.ArrayList;
@@ -203,7 +204,7 @@ public class IPMcHelper {
                 BlockHitResult.miss(
                     end,
                     Direction.getNearest(diff.x, diff.y, diff.z),
-                    new BlockPos(end)
+                        Helper.toBlockPos(end)
                 ),
                 portals
             );

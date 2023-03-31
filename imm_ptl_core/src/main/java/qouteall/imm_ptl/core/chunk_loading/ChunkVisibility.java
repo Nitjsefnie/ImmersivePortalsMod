@@ -11,6 +11,7 @@ import qouteall.imm_ptl.core.IPGlobal;
 import qouteall.imm_ptl.core.McHelper;
 import qouteall.imm_ptl.core.portal.Portal;
 import qouteall.imm_ptl.core.portal.global_portals.GlobalPortalStorage;
+import qouteall.q_misc_util.Helper;
 import qouteall.q_misc_util.my_util.LimitedLogger;
 
 import java.util.Comparator;
@@ -115,8 +116,8 @@ public class ChunkVisibility {
             return new ChunkLoader(
                 new DimensionalChunkPos(
                     portal.dimensionTo,
-                    new ChunkPos(new BlockPos(
-                        portal.transformPoint(player.position())
+                    new ChunkPos(Helper.toBlockPos(
+                            portal.transformPoint(player.position())
                     ))
                 ),
                 renderDistance
@@ -134,7 +135,7 @@ public class ChunkVisibility {
             return new ChunkLoader(
                 new DimensionalChunkPos(
                     portal.dimensionTo,
-                    new ChunkPos(new BlockPos(portal.getDestPos()))
+                    new ChunkPos(Helper.toBlockPos(portal.getDestPos()))
                 ),
                 getCappedLoadingDistance(
                     portal, player,
@@ -159,7 +160,7 @@ public class ChunkVisibility {
             return new ChunkLoader(
                 new DimensionalChunkPos(
                     portal.dimensionTo,
-                    new ChunkPos(new BlockPos(transformedPos))
+                    new ChunkPos(Helper.toBlockPos(transformedPos))
                 ),
                 renderDistance
             );
@@ -168,7 +169,7 @@ public class ChunkVisibility {
             return new ChunkLoader(
                 new DimensionalChunkPos(
                     portal.dimensionTo,
-                    new ChunkPos(new BlockPos(portal.getDestPos()))
+                    new ChunkPos(Helper.toBlockPos(portal.getDestPos()))
                 ),
                 getCappedLoadingDistance(
                     portal, player, serverLoadingDistance / 4

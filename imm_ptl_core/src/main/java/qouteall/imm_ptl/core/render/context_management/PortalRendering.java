@@ -15,6 +15,7 @@ import qouteall.imm_ptl.core.portal.Portal;
 import qouteall.imm_ptl.core.portal.PortalLike;
 import qouteall.imm_ptl.core.render.PortalRenderer;
 import qouteall.imm_ptl.core.render.VisibleSectionDiscovery;
+import qouteall.q_misc_util.Helper;
 import qouteall.q_misc_util.my_util.Plane;
 
 import javax.annotation.Nullable;
@@ -143,7 +144,7 @@ public class PortalRendering {
         
         Vec3 result = portal.transformPoint(nearestPoint);
         
-        return new BlockPos(result);
+        return Helper.toBlockPos(result);
     }
     
     /**

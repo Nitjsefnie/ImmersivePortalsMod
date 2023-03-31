@@ -24,6 +24,7 @@ import qouteall.imm_ptl.core.chunk_loading.DimensionalChunkPos;
 import qouteall.imm_ptl.core.render.GuiPortalRendering;
 import qouteall.imm_ptl.core.render.MyRenderHelper;
 import qouteall.imm_ptl.core.render.context_management.WorldRenderInfo;
+import qouteall.q_misc_util.Helper;
 import qouteall.q_misc_util.api.McRemoteProcedureCall;
 import qouteall.q_misc_util.my_util.DQuaternion;
 
@@ -78,10 +79,10 @@ public class ExampleGuiPortalRendering {
     
     public static void onCommandExecuted(ServerPlayer player, ServerLevel world, Vec3 pos) {
         removeChunkLoaderFor(player);
-        
+
         ChunkLoader chunkLoader = new ChunkLoader(
             new DimensionalChunkPos(
-                world.dimension(), new ChunkPos(new BlockPos(pos))
+                world.dimension(), new ChunkPos(Helper.toBlockPos(pos))
             ),
             8
         );

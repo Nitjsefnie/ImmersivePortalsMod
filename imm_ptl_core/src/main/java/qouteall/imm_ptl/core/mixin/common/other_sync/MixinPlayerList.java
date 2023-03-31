@@ -24,6 +24,7 @@ import qouteall.imm_ptl.core.IPGlobal;
 import qouteall.imm_ptl.core.chunk_loading.NewChunkTrackingGraph;
 import qouteall.imm_ptl.core.network.PacketRedirection;
 import qouteall.imm_ptl.core.portal.global_portals.GlobalPortalStorage;
+import qouteall.q_misc_util.Helper;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -100,7 +101,7 @@ public class MixinPlayerList {
         double x, double y, double z, double distance,
         ResourceKey<Level> dimension, Packet<?> packet
     ) {
-        ChunkPos chunkPos = new ChunkPos(new BlockPos(new Vec3(x, y, z)));
+        ChunkPos chunkPos = new ChunkPos(Helper.toBlockPos(new Vec3(x, y, z)));
         
         NewChunkTrackingGraph.getPlayersViewingChunk(
             dimension, chunkPos.x, chunkPos.z

@@ -139,10 +139,10 @@ public class WorldWrappingPortal extends GlobalTrackedPortal {
             AABB floatBox = getArea();
             
             return new IntBox(
-                new BlockPos(
+                Helper.toBlockPos(
                     Math.round(floatBox.minX), McHelper.getMinY(world), Math.round(floatBox.minZ)
                 ),
-                new BlockPos(
+                Helper.toBlockPos(
                     Math.round(floatBox.maxX) - 1, McHelper.getMaxYExclusive(world), Math.round(floatBox.maxZ) - 1
                 )
             );
@@ -158,10 +158,10 @@ public class WorldWrappingPortal extends GlobalTrackedPortal {
             
             return new IntBox(
                 new BlockPos(
-                    Math.round(floatBox.minX) - 1, McHelper.getMinY(world), Math.round(floatBox.minZ) - 1
+                        Math.toIntExact(Math.round(floatBox.minX) - 1), McHelper.getMinY(world), Math.toIntExact(Math.round(floatBox.minZ) - 1)
                 ),
                 new BlockPos(
-                    Math.round(floatBox.maxX), McHelper.getMaxYExclusive(world), Math.round(floatBox.maxZ)
+                        Math.toIntExact(Math.round(floatBox.maxX)), McHelper.getMaxYExclusive(world), Math.toIntExact(Math.round(floatBox.maxZ))
                 )
             );
         }

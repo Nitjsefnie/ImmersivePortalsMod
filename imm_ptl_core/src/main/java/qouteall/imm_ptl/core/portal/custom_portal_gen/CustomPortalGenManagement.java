@@ -179,7 +179,7 @@ public class CustomPortalGenManagement {
         if (entity.level.isClientSide()) {
             return;
         }
-        if (entity.getThrower() == null) {
+        if (entity.thrower == null) {
             return;
         }
         
@@ -219,7 +219,7 @@ public class CustomPortalGenManagement {
             
             ServerLevel startWorld = McHelper.getServerWorld(startCoord.dimension);
             
-            BlockPos startPos = new BlockPos(startCoord.pos);
+            BlockPos startPos = Helper.toBlockPos(startCoord.pos);
             
             for (CustomPortalGeneration gen : convGen) {
                 boolean succeeded = gen.perform(startWorld, startPos, player);

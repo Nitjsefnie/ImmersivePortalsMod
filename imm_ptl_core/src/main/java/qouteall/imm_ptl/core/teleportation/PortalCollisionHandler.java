@@ -136,7 +136,7 @@ public class PortalCollisionHandler {
         
         Level destinationWorld = collidingPortal.getDestWorld();
         
-        if (!destinationWorld.hasChunkAt(new BlockPos(boxOtherSide.getCenter()))) {
+        if (!destinationWorld.hasChunkAt(Helper.toBlockPos(boxOtherSide.getCenter()))) {
             return handleOtherSideChunkNotLoaded(
                 entity, attemptedMove, collidingPortal, originalBoundingBox
             );
@@ -146,7 +146,7 @@ public class PortalCollisionHandler {
         Level oldWorld = entity.level;
         Vec3 oldPos = entity.position();
         Vec3 oldLastTickPos = McHelper.lastTickPosOf(entity);
-        float oldStepHeight = entity.maxUpStep;
+        float oldStepHeight = entity.maxUpStep();
         
         entity.level = destinationWorld;
         McHelper.setPosAndLastTickPosWithoutTriggeringCallback(
@@ -157,7 +157,7 @@ public class PortalCollisionHandler {
         entity.setBoundingBox(boxOtherSide);
         
         if (collidingPortal.getScale() > 1) {
-            entity.maxUpStep = (float) (oldStepHeight * collidingPortal.getScale() * 1.01);
+            entity.setMaxUpStep((float) (oldStepHeight * collidingPortal.getScale() * 1.01));
         }
         
         try {
@@ -220,7 +220,7 @@ public class PortalCollisionHandler {
             entity.level = oldWorld;
             McHelper.setPosAndLastTickPosWithoutTriggeringCallback(entity, oldPos, oldLastTickPos);
             entity.setBoundingBox(originalBoundingBox);
-            entity.maxUpStep = oldStepHeight;
+            entity.setMaxUpStep(oldStepHeight);
         }
     }
     

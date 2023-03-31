@@ -945,4 +945,18 @@ public class Helper {
             }
         };
     }
+
+    public static BlockPos toBlockPos (Vec3 vec) {
+        return new BlockPos(
+                Mth.floor(vec.x),
+                Mth.floor(vec.y),
+                Mth.floor(vec.z));
+    }
+
+    public static BlockPos toBlockPos (double x, double y, double z) {
+        return new BlockPos(
+                Mth.floor(x),
+                Mth.floor(y),
+                Mth.floor(z));
+    }
 }

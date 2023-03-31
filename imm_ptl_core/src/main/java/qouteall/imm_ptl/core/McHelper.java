@@ -44,6 +44,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 import qouteall.imm_ptl.core.compat.GravityChangerInterface;
 import qouteall.imm_ptl.core.ducks.IEEntity;
 import qouteall.imm_ptl.core.ducks.IEEntityTrackingSection;
@@ -598,7 +599,7 @@ public class McHelper {
             radiusChunks = 32;
         }
         
-        ChunkPos chunkPos = new ChunkPos(new BlockPos(center));
+        ChunkPos chunkPos = new ChunkPos(Helper.toBlockPos(center));
         return findEntities(
             entityClass,
             ((IEWorld) world).portal_getEntityLookup(),
@@ -701,7 +702,7 @@ public class McHelper {
         Class<T> entityClass, Level world, Vec3 point, int roughRadius,
         Function<T, R> function
     ) {
-        SectionPos sectionPos = SectionPos.of(new BlockPos(point));
+        SectionPos sectionPos = SectionPos.of(Helper.toBlockPos(point));
         int roughRadiusChunks = roughRadius / 16;
         if (roughRadiusChunks == 0) {
             roughRadiusChunks = 1;
